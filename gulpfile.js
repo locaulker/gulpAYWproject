@@ -98,13 +98,13 @@ gulp.task('sprites', function() {
 
 
 // Watch Tasks
-gulp.task('watch', ['browserSync', 'sass', 'nunjucks'], function() {
+gulp.task('watch', function() {
   gulp.watch('app/scss/**/*.scss', ['sass']);
   gulp.watch('app/js/**/*.js', browserSync.reload);
-  gulp.watch('app/*.html', browserSync.reload);
+  // gulp.watch('app/*.html', browserSync.reload);
   gulp.watch([
-    'app/templates/**/*',
     'app/pages/**/*.+(html|nunjucks)',
+    'app/templates/**/*',
     'app/data.json'
   ], ['nunjucks']);
 });
