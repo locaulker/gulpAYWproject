@@ -1,0 +1,23 @@
+{
+  "name": "gulp-ayw-project",
+  "description": "",
+  "main": "index.js",
+  "authors": [
+    "Lawrence O. Caulker"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/locaulker/gulpAYWproject",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "private": true,
+  "dependencies": {
+    "jquery": "1.11.3",
+    "ResponsiveGridSystem": "*",
+    "susy": "^2.2.12"
+  }
+}

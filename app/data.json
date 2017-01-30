@@ -1,0 +1,30 @@
+{
+  "images": [{
+    "src": "images/samples/big_ben.jpg",
+    "alt": "Big Ben"
+  }, {
+    "src": "images/samples/buckingham.jpg",
+    "alt": "Buckingham Palece"
+  }, {
+    "src": "images/samples/cathedral.jpg",
+    "alt": "cathedral"
+  }, {
+    "src": "images/samples/hyde_park.jpg",
+    "alt": "Hyde Park"
+  }, {
+    "src": "images/samples/london_eye.jpg",
+    "alt": "London Eye"
+  }, {
+    "src": "images/samples/musem_nh.jpg",
+    "alt": "Museum"
+  }, {
+    "src": "images/samples/tower_bridge.jpg",
+    "alt": "Tower Bridge"
+  }, {
+    "src": "images/samples/westminster_abbey.jpg",
+    "alt": "Westminster Abbey"
+  }, {
+    "src": "images/samples/westminster.jpg",
+    "alt": "Westminster"
+  }]
+}

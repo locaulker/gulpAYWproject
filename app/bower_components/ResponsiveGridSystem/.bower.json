@@ -1,0 +1,14 @@
+{
+  "name": "ResponsiveGridSystem",
+  "homepage": "https://github.com/grahammiller/ResponsiveGridSystem",
+  "_release": "4a9cf4f17b",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "4a9cf4f17bc5f547b78bde923e1e06b5184f6162"
+  },
+  "_source": "https://github.com/grahammiller/ResponsiveGridSystem.git",
+  "_target": "*",
+  "_originalSource": "ResponsiveGridSystem",
+  "_direct": true
+}
