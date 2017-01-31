@@ -11,14 +11,11 @@ nunjucksRender = require('gulp-nunjucks-render'),
 data = require('gulp-data'),
 fs = require('fs'),
 del = require('del'),
-runSequence = require('run-sequence');
+runSequence = require('run-sequence'),
+// jshint = require('jshint'),
+jshint = require('gulp-jshint'),
+jscs = require('gulp-jscs');
 
-gulp.task('clean:dev', function() {
-  return del.sync([
-    'app/css',
-    'app/*.html'
-  ])
-});
 
 
 function customPlumber(errTitle) {
@@ -49,7 +46,7 @@ gulp.task('sass', function() {
     .pipe(gulp.dest('app/css'))
     .pipe(browserSync.reload({
       stream: true
-    }))
+    }));
 });
 
 
@@ -63,6 +60,8 @@ gulp.task('browserSync', function() {
   })
 });
 
+
+// Templating Task
 gulp.task('nunjucks', function() {
   nunjucksRender.nunjucks.configure(['app/templates/']);
 
@@ -98,22 +97,52 @@ gulp.task('sprites', function() {
 
 
 // Watch Tasks
+gulp.task('watch-js', ['lint:js'], browserSync.reload);
+
 gulp.task('watch', function() {
+  gulp.watch('app/js/**/*.js', ['watch-js']);
   gulp.watch('app/scss/**/*.scss', ['sass']);
-  gulp.watch('app/js/**/*.js', browserSync.reload);
-  // gulp.watch('app/*.html', browserSync.reload);
   gulp.watch([
     'app/pages/**/*.+(html|nunjucks)',
     'app/templates/**/*',
     'app/data.json'
-  ], ['nunjucks']);
+  ], ['nunjucks'])
 });
 
 
+// JSHint Tasks
+gulp.task('lint:js', function() {
+  return gulp.src('app/js/**/*.js')
+    .pipe(customPlumber('Oops! JSHint Error Occurred'))
+    .pipe(jshint())
+    // .pipe(jshint.reporter('default'))
+    .pipe(jshint.reporter('jshint-stylish', 'fail', {
+      ignoreWarning: true,
+      ignoreInfo: true
+    }))
+    .pipe(jscs({
+      fix: true,
+      configPath: '.jscsrc'
+    }))
+    // .pipe(jscs.reporter()) // Removed
+    .pipe(gulp.dest('app/js'))
+});
+
+
+// Clean
+gulp.task('clean:dev', function() {
+  return del.sync([
+    'app/css',
+    'app/*.html'
+  ])
+});
+
+
+// Run Tasks in defined sequence
 gulp.task('default', function(callback) {
   runSequence(
     'clean:dev',
-    'sprites',
+    ['sprites', 'lint:js'],
     ['sass', 'nunjucks'],
     ['browserSync', 'watch'],
     callback
