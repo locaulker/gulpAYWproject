@@ -1,34 +1,35 @@
-@import "susy/sass/susy";
-@import "sprites";
-@import "testing";
+@import 'susy/sass/susy';
+// @import "sprites";
+// @import "testing";
 
-@include sprites($spritesheet-sprites);
+// @include sprites($spritesheet-sprites);
 
-body {
-  background-color: #f2f2f2;
-}
-
-li {
-  margin-bottom: 20px;
-  list-style: none;
-  display: inline-block;
-  padding: 1rem 2rem;
-  background-color: teal;
-  border-radius: 8px;
-  margin-right: 10px;
-
-  a {
-    text-decoration: none;
-    font-size: 2rem;
-    color: #fff;
-  }
-
-  a:hover {
-    color: yellow;
-  }
-
-
-}
+// $light-gray: #f2f2f2;
+// body {
+//   background-color: $light-gray;
+// }
+//
+// li {
+//   margin-bottom: 20px;
+//   list-style: none;
+//   display: inline-block;
+//   padding: 1rem 2rem;
+//   background-color: teal;
+//   border-radius: 8px;
+//   margin-right: 10px;
+//
+//   a {
+//     text-decoration: none;
+//     font-size: 2rem;
+//     color: #fff;
+//   }
+//
+//   a:hover {
+//     color: yellow;
+//   }
+//
+//
+// }
 
 .flex {
   display: flex;

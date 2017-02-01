@@ -14,7 +14,8 @@ del = require('del'),
 runSequence = require('run-sequence'),
 // jshint = require('jshint'),
 jshint = require('gulp-jshint'),
-jscs = require('gulp-jscs');
+jscs = require('gulp-jscs'),
+scssLint = require('gulp-scss-lint');
 
 
 
@@ -47,6 +48,16 @@ gulp.task('sass', function() {
     .pipe(browserSync.reload({
       stream: true
     }));
+});
+
+
+// SCSS Lint Task
+gulp.task('lint:scss', function() {
+  // Lint All files Except the generated _sprites.scss file
+  return gulp.src(['app/scss/**/*.scss', '!app/scss/_sprites.scss'])
+    .pipe(scssLint({
+      config: '.scss-lint.yml'
+    }))
 });
 
 
@@ -101,7 +112,7 @@ gulp.task('watch-js', ['lint:js'], browserSync.reload);
 
 gulp.task('watch', function() {
   gulp.watch('app/js/**/*.js', ['watch-js']);
-  gulp.watch('app/scss/**/*.scss', ['sass']);
+  gulp.watch('app/scss/**/*.scss', ['sass', 'lint:scss']);
   gulp.watch([
     'app/pages/**/*.+(html|nunjucks)',
     'app/templates/**/*',
@@ -142,7 +153,7 @@ gulp.task('clean:dev', function() {
 gulp.task('default', function(callback) {
   runSequence(
     'clean:dev',
-    ['sprites', 'lint:js'],
+    ['sprites', 'lint:js', 'lint:scss'],
     ['sass', 'nunjucks'],
     ['browserSync', 'watch'],
     callback
