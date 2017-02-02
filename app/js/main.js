@@ -4,6 +4,6 @@ $(document).ready(function() {
 
     // Comparing with == generates a warning
     if ('testing' === 'testing') {
-      console.log($);
+      //console.log($);
     }
   });

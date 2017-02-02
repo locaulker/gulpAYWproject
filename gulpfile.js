@@ -12,11 +12,19 @@ data = require('gulp-data'),
 fs = require('fs'),
 del = require('del'),
 runSequence = require('run-sequence'),
-// jshint = require('jshint'),
 jshint = require('gulp-jshint'),
 jscs = require('gulp-jscs'),
-scssLint = require('gulp-scss-lint');
+scssLint = require('gulp-scss-lint'),
+Server = require('karma').Server;
 
+
+// Unit Testing task
+gulp.task('test', function(done) {
+  new Server({
+    configFile: __dirname + '/karma.conf.js',
+    singleRun: true
+  }, done).start();
+});
 
 
 function customPlumber(errTitle) {
@@ -53,7 +61,7 @@ gulp.task('sass', function() {
 
 // SCSS Lint Task
 gulp.task('lint:scss', function() {
-  // Lint All files Except the generated _sprites.scss file
+  // Lint All files EXCEPT the generated _sprites.scss file
   return gulp.src(['app/scss/**/*.scss', '!app/scss/_sprites.scss'])
     .pipe(scssLint({
       config: '.scss-lint.yml'
@@ -126,7 +134,7 @@ gulp.task('lint:js', function() {
   return gulp.src('app/js/**/*.js')
     .pipe(customPlumber('Oops! JSHint Error Occurred'))
     .pipe(jshint())
-    // .pipe(jshint.reporter('default'))
+    //.pipe(jshint.reporter('default')) or
     .pipe(jshint.reporter('jshint-stylish', 'fail', {
       ignoreWarning: true,
       ignoreInfo: true
