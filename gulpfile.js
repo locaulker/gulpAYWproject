@@ -15,17 +15,19 @@ runSequence = require('run-sequence'),
 jshint = require('gulp-jshint'),
 jscs = require('gulp-jscs'),
 scssLint = require('gulp-scss-lint'),
-Server = require('karma').Server;
+//Server = require('karma').Server,
+useref = require('gulp-useref');
 
 
 // Unit Testing task
+/*
 gulp.task('test', function(done) {
   new Server({
     configFile: __dirname + '/karma.conf.js',
     singleRun: true
   }, done).start();
 });
-
+*/
 
 function customPlumber(errTitle) {
   return plumber({
@@ -154,6 +156,14 @@ gulp.task('clean:dev', function() {
     'app/css',
     'app/*.html'
   ])
+});
+
+
+// Concatenating JS files
+gulp.task('useref', function() {
+  return gulp.src('app/*.html')
+    .pipe(useref())
+    .pipe(gulp.dest('dist'))
 });
 
 
