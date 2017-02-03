@@ -16,7 +16,10 @@ jshint = require('gulp-jshint'),
 jscs = require('gulp-jscs'),
 scssLint = require('gulp-scss-lint'),
 //Server = require('karma').Server,
-useref = require('gulp-useref');
+useref = require('gulp-useref'),
+uglify = require('gulp-uglify'),
+debug = require('gulp-debug'),
+cached = require('gulp-cached');
 
 
 // Unit Testing task
@@ -159,10 +162,15 @@ gulp.task('clean:dev', function() {
 });
 
 
-// Concatenating JS files
+// Concatenating and minifying JS files
 gulp.task('useref', function() {
+  //var assets = useref.assets();
+
   return gulp.src('app/*.html')
-    .pipe(useref())
+    .pipe(useref())   // Concatenate JS files
+    .pipe(cached(useref))
+    .pipe(debug())
+    .pipe(gulpIf('*.js', uglify()))  // Minify Concatenated JS file
     .pipe(gulp.dest('dist'))
 });
 
